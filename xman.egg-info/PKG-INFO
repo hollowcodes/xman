@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: xman
+Version: 0.0.1
+Summary: A simple libary to manage deep-learning experiments.
+Home-page: https://github.com/hollowcodes/xman
+Author: Theodor Peifer
+Author-email: teddypeifer@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Linux
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

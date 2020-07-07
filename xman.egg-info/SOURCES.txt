@@ -1,0 +1,6 @@
+README.md
+setup.py
+xman.egg-info/PKG-INFO
+xman.egg-info/SOURCES.txt
+xman.egg-info/dependency_links.txt
+xman.egg-info/top_level.txt
