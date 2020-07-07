@@ -38,6 +38,7 @@ for epoch in range(epochs):
     for sample, target in dataset:
 
         ...
+
         predict()
         backward()
         step()
@@ -47,8 +48,7 @@ for epoch in range(epochs):
     ...
 
     # log current epoch
-    xmanager.log_epoch(model, lr, batch_size, epoch_train_accuracy, 
-            epoch_train_loss, epoch_val_accuracy, epoch_val_loss)
+    xmanager.log_epoch(model, lr, batch_size, epoch_train_accuracy, epoch_train_loss, epoch_val_accuracy, epoch_val_loss)
 
 # plot logged training-history
 xmanager.plot_history(save=True)
@@ -106,8 +106,7 @@ for epoch in range(epochs):
     ...
 
     # log current epoch
-    xmanager.log_epoch(model, lr, batch_size, epoch_train_accuracy, 
-            epoch_train_loss, epoch_val_accuracy, epoch_val_loss)
+    xmanager.log_epoch(model, lr, batch_size, epoch_train_accuracy, epoch_train_loss, epoch_val_accuracy, epoch_val_loss)
 
 # plot logged training-history if wanted
 xmanager.plot_history(save=True)
