@@ -1,4 +1,7 @@
-# XMAN 
+
+<p align="center"> 
+<img src="logo.png">
+</p> 
 
 ## xman is a simple python-package to manage and keep track of your (Pytorch-) deep-learning experiments
 
