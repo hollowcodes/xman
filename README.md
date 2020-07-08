@@ -32,7 +32,8 @@ your_directory/
 ```
 
 ## | train_stats.json
-### 'learning-rate' and batch-size' are also lists, because they can change while training (ie. learning-rate decay).
+### 'learning-rate' and batch-size' are lists, because they can change while training (ie. learning-rate decay).
+#### (train_stats.json after two epochs: )
 ```json
 {
     "hyperparameters": {
@@ -50,22 +51,18 @@ your_directory/
         "train-accuracy": [
             12.7551,
             11.12245,
-            . . .
         ],
         "train-loss": [
             2.310244143009186,
             2.3060443997383118,
-            . . .
         ],
         "validation-accuracy": [
             20.0,
             20.0,
-            . . .
         ],
         "validation-loss": [
             2.304267168045044,
             2.2817447185516357,
-            . . .
         ]
     }
 
