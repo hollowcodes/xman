@@ -2,8 +2,8 @@
 import json
 import os
 import matplotlib.pyplot as plt
-import re
 import torch
+import shutil
 
 
 class ExperimentManager:
@@ -25,13 +25,15 @@ class ExperimentManager:
 
         # xman-folder
         self.parent_directory = "./x-manager/"
+        # experiment-folder
+        self.experiment_directory = self.parent_directory + self.experiment_name + "/"
 
         # create x-manager folder if first usage
         if not os.path.exists(self.parent_directory):
             os.mkdir(self.parent_directory)
 
         # check if experiment exists
-        if not self.new and not os.path.exists(self.parent_directory + self.experiment_name):
+        if not self.new and not os.path.exists(self.experiment_directory):
             raise FileNotFoundError("Experiment '" + self.experiment_name + "' not found. To create it set 'new' to 'True'.")
 
         # number of current experiments in xman-folder
@@ -39,7 +41,9 @@ class ExperimentManager:
 
         # if there is no experiment or a new one want to be created, create new experiment
         if self.total_experiments == 0 or self.new:
-            self.experiment_directory = self.parent_directory + self.experiment_name + "/"
+            if os.path.exists(self.experiment_directory):
+                shutil.rmtree(self.experiment_directory)
+
             self.file_ = self.experiment_directory + "train_stats.json"
             self.model = self.experiment_directory + "model.pt"
 
@@ -49,7 +53,6 @@ class ExperimentManager:
             open(self.file_, "w+").close()
             # create pytorch-model file
             open(self.model, "w+").close()
-        
         else:
             self.experiment_directory = self.parent_directory + self.experiment_name + "/"
             self.file_ = self.experiment_directory + "train_stats.json"
@@ -66,6 +69,18 @@ class ExperimentManager:
             :param dict custom_parameters: a dictionary of custom hyperparameters (ie. {"learning-rate-decay": 0.9, "residual": True})
                 which gets concatinated with the standart hyperparameter-dictionary
         """
+
+        try:
+            if repr(type(optimizer)).split(".")[1] == "optim":
+                optimizer = repr(type(optimizer)).split(".")[3].split("'")[0]
+        except:
+            pass
+
+        try:
+            if repr(type(loss_function)).split(".")[3] == "loss":
+                loss_function = repr(type(loss_function)).split(".")[4].split("'")[0]
+        except:
+            pass
 
         # if new training starts initialize training-stats json object
         if not self.continue_:

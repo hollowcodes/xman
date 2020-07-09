@@ -6,7 +6,7 @@
 ## xman is a simple python-package to manage and keep track of your (Pytorch-) deep-learning experiments
 
 ## | description
-### xman creates a 'x-manager/' folder in a given directory, which contains experiment-folders which each have a json-file with the hyperparameters and results of an experiment.
+#### xman creates a 'x-manager/' folder in a given directory, which contains experiment-folders which each have a json-file with the hyperparameters and results of an experiment.
 
 ## | installation using pip
 ```bash
@@ -14,7 +14,7 @@ pip install xman
 ```
 
 ## | x-manager/ structure
-### the name of the experiment-folders must be chosen by the user.
+#### the name of the experiment-folders must be chosen by the user.
 ```
 your_directory/
     ––– model.py
@@ -35,8 +35,8 @@ your_directory/
 ```
 
 ## | train_stats.json
-### 'learning-rate' and batch-size' are lists, because they can change while training (ie. learning-rate decay).
-#### (train_stats.json after two epochs: )
+#### 'learning-rate' and batch-size' are lists, because they can change while training (ie. learning-rate decay).
+##### (train_stats.json after two epochs: )
 ```json
 {
     "hyperparameters": {
@@ -74,8 +74,8 @@ your_directory/
 
 ## | standart usage
 
-### To create a new experiment, set 'new=True' after the name of the experiment. Before running the experiment the next time this has to be set back to 'False', otherwise it will be recreated and the saved stats will be deleted.
-### If you interrupt the trainings-process (ie. to change the learning-rate), but you want to stay in the same training-session (by loading the last checkpoint) set 'continue_=True'. Otherwise the saved training-stats of the experiment will be overwritten, when restarting the training.
+#### To create a new experiment, set 'new=True' after the name of the experiment. Before running the experiment the next time this has to be set back to 'False', otherwise it will be recreated and the saved stats will be deleted.
+#### If you interrupt the trainings-process (ie. to change the learning-rate), but you want to stay in the same training-session (by loading the last checkpoint) set 'continue_=True'. Otherwise the saved training-stats of the experiment will be overwritten, when restarting the training.
 ```python
 import torch
 from xman import ExperimentLogger
@@ -179,4 +179,17 @@ for epoch in range(epochs):
 
 # plot logged training-history if wanted
 xmanager.plot_history(save=True)
+```
+
+#### instead of writing the optimizer and loss-function yourself into the init function, you can also use your defined functions directly as arguments:
+```python
+# functions
+optimizer = torch.optim.Adam()
+criterion = torch.nn.MSELoss()
+
+xmanager.init(optimizer=optimizer, 
+              loss_function=criterion, 
+              epochs=epochs, 
+              learning_rate=lr, 
+              batch_size=batch_size)
 ```
