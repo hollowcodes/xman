@@ -8,10 +8,18 @@
 ## | description
 #### xman creates a 'x-manager/' folder in a given directory, which contains experiment-folders which each have a json-file with the hyperparameters and results of an experiment.
 
-## | installation using pip
+## | installation
+#### using pip (doesn't work, not on PyPi yet):
 ```bash
 pip install xman
 ```
+#### using git-clone and setup
+```bash
+git clone git@github.com:hollowcodes/xman.git
+cd xman
+./install.sh
+```
+
 
 ## | x-manager/ structure
 #### the name of the experiment-folders must be chosen by the user.
