@@ -199,14 +199,14 @@ def get_train_stats(experiment_name: str="") -> list:
         :return lists: train-accuracy, validation-accuracy, train-loss, validation-loss
     """
 
-    train_stats_file = "./x-manager/" + experiment_name + "/"
+    train_stats_file = "./x-manager/" + experiment_name + "/train_stats.json"
     with open(train_stats_file, "r") as f:
         train_stats = json.load(f)
 
-    train_accuracy = train_stats["hyperparameters"]["train-accuracy"]
-    val_accuracy = train_stats["hyperparameters"]["validation-accuracy"]
+    train_accuracy = train_stats["results"]["train-accuracy"]
+    val_accuracy = train_stats["results"]["validation-accuracy"]
 
-    train_loss = train_stats["hyperparameters"]["train-loss"]
-    val_loss = train_stats["hyperparameters"]["validation-loss"]
+    train_loss = train_stats["results"]["train-loss"]
+    val_loss = train_stats["results"]["validation-loss"]
 
     return train_accuracy, val_accuracy, train_loss, val_accuracy
