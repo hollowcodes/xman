@@ -86,7 +86,7 @@ your_directory/
 #### If you interrupt the trainings-process (ie. to change the learning-rate), but you want to stay in the same training-session (by loading the last checkpoint) set 'continue_=True'. Otherwise the saved training-stats of the experiment will be overwritten, when restarting the training.
 ```python
 import torch
-from xman import ExperimentLogger
+import xman
 
 # functions
 optimizer = torch.optim.Adam()
@@ -98,7 +98,7 @@ lr = 0.001
 batch_size = 64
 
 # create new experiment (give name with 'experiment_name' and tell to create with 'new=True')
-xmanager = ExperimentManager(experiment_name="experiment1", new=True, continue_=False)
+xmanager = xman.ExperimentManager(experiment_name="experiment1", new=True, continue_=False)
 
 # initialize xmanager with (initial) hyperparameters
 xmanager.init(optimizer="Adam", 
@@ -150,7 +150,7 @@ droput_chance = 0.45
 
 # create new experiment
 # give name with 'experiment_name' and tell to create with 'new=True', before running it again change 'new' to False
-xmanager = ExperimentManager(experiment_name="experiment1", new=True, continue_=False)
+xmanager = xman.ExperimentManager(experiment_name="experiment1", new=True, continue_=False)
 
 # initialize xmanager with (initial) hyperparameters
 xmanager.init(optimizer="Adam", 
@@ -183,7 +183,7 @@ xmanager.init(optimizer=optimizer,
 ## | get the accuracies and losses of every epoch from an experiment
 ```python
 
-from xman import get_train_stats
+import xman
 
-train_accuracies, val_accuracies, train_losses, val_losses = get_train_stats(experiment_name="experiment1")
+train_accuracies, val_accuracies, train_losses, val_losses = xman.get_train_stats(experiment_name="experiment1")
 ```
