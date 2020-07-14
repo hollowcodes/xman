@@ -165,28 +165,6 @@ xmanager.init(optimizer="Adam",
                     "lstm-layers": lstm_layers,
                     "dropout-change": dropout_chance
               })
-
-# train loop
-for epoch in range(epochs):
-
-    # data loop
-    for sample, target in dataset:
-
-        . . .
-
-        predict()
-        backward()
-        step()
-
-        . . .
-
-    . . .
-
-    # log current epoch
-    xmanager.log_epoch(model, lr, batch_size, epoch_train_accuracy, epoch_train_loss, epoch_val_accuracy, epoch_val_loss)
-
-# plot logged training-history if wanted
-xmanager.plot_history(save=True)
 ```
 
 #### instead of writing the optimizer and loss-function yourself into the init function, you can also use your defined functions directly as arguments:
@@ -200,4 +178,12 @@ xmanager.init(optimizer=optimizer,
               epochs=epochs, 
               learning_rate=lr, 
               batch_size=batch_size)
+```
+
+## | get the accuracies and losses of every epoch from an experiment
+```python
+
+from xman import get_train_stats
+
+train_accuracies, val_accuracies, train_losses, val_losses = get_train_stats(experiment_name="experiment1")
 ```

@@ -14,15 +14,23 @@ Description:
         ## xman is a simple python-package to manage and keep track of your (Pytorch-) deep-learning experiments
         
         ## | description
-        ### xman creates a 'x-manager/' folder in a given directory, which contains experiment-folders which each have a json-file with the hyperparameters and results of an experiment.
+        #### xman creates a 'x-manager/' folder in a given directory, which contains experiment-folders which each have a json-file with the hyperparameters and results of an experiment.
         
-        ## | installation using pip
+        ## | installation
+        #### using pip (doesn't work, not on PyPi yet):
         ```bash
         pip install xman
         ```
+        #### using git-clone and setup
+        ```bash
+        git clone git@github.com:hollowcodes/xman.git
+        cd xman
+        ./install.sh
+        ```
+        
         
         ## | x-manager/ structure
-        ### the name of the experiment-folders must be chosen by the user.
+        #### the name of the experiment-folders must be chosen by the user.
         ```
         your_directory/
             ––– model.py
@@ -43,8 +51,8 @@ Description:
         ```
         
         ## | train_stats.json
-        ### 'learning-rate' and batch-size' are lists, because they can change while training (ie. learning-rate decay).
-        #### (train_stats.json after two epochs: )
+        #### 'learning-rate' and batch-size' are lists, because they can change while training (ie. learning-rate decay).
+        ##### (train_stats.json after two epochs: )
         ```json
         {
             "hyperparameters": {
@@ -82,8 +90,8 @@ Description:
         
         ## | standart usage
         
-        ### To create a new experiment, set 'new=True' after the name of the experiment. Before running the experiment the next time this has to be set back to 'False', otherwise it will be recreated and the saved stats will be deleted.
-        ### If you interrupt the trainings-process (ie. to change the learning-rate), but you want to stay in the same training-session (by loading the last checkpoint) set 'continue_=True'. Otherwise the saved training-stats of the experiment will be overwritten, when restarting the training.
+        #### To create a new experiment, set 'new=True' after the name of the experiment. Before running the experiment the next time this has to be set back to 'False', otherwise it will be recreated and the saved stats will be deleted.
+        #### If you interrupt the trainings-process (ie. to change the learning-rate), but you want to stay in the same training-session (by loading the last checkpoint) set 'continue_=True'. Otherwise the saved training-stats of the experiment will be overwritten, when restarting the training.
         ```python
         import torch
         from xman import ExperimentLogger
@@ -165,30 +173,28 @@ Description:
                             "lstm-layers": lstm_layers,
                             "dropout-change": dropout_chance
                       })
-        
-        # train loop
-        for epoch in range(epochs):
-        
-            # data loop
-            for sample, target in dataset:
-        
-                . . .
-        
-                predict()
-                backward()
-                step()
-        
-                . . .
-        
-            . . .
-        
-            # log current epoch
-            xmanager.log_epoch(model, lr, batch_size, epoch_train_accuracy, epoch_train_loss, epoch_val_accuracy, epoch_val_loss)
-        
-        # plot logged training-history if wanted
-        xmanager.plot_history(save=True)
         ```
         
+        #### instead of writing the optimizer and loss-function yourself into the init function, you can also use your defined functions directly as arguments:
+        ```python
+        # functions
+        optimizer = torch.optim.Adam()
+        criterion = torch.nn.MSELoss()
+        
+        xmanager.init(optimizer=optimizer, 
+                      loss_function=criterion, 
+                      epochs=epochs, 
+                      learning_rate=lr, 
+                      batch_size=batch_size)
+        ```
+        
+        ## | get the accuracies and losses of every epoch from an experiment
+        ```python
+        
+        from xman import get_train_stats
+        
+        train_accuracies, val_accuracies, train_losses, val_losses = get_train_stats(experiment_name="experiment1")
+        ```
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License

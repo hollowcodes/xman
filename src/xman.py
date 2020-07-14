@@ -192,3 +192,21 @@ class ExperimentManager:
 
         plt.show()
 
+
+def get_train_stats(experiment_name: str="") -> list:
+    """ returns the training-stats (accuracy/loss)
+
+        :return lists: train-accuracy, validation-accuracy, train-loss, validation-loss
+    """
+
+    train_stats_file = "./x-manager/" + experiment_name + "/"
+    with open(train_stats_file, "r") as f:
+        train_stats = json.load(f)
+
+    train_accuracy = train_stats["hyperparameters"]["train-accuracy"]
+    val_accuracy = train_stats["hyperparameters"]["validation-accuracy"]
+
+    train_loss = train_stats["hyperparameters"]["train-loss"]
+    val_loss = train_stats["hyperparameters"]["validation-loss"]
+
+    return train_accuracy, val_accuracy, train_loss, val_accuracy
